@@ -1,0 +1,16 @@
+{
+  "q1_uv_version_local": "0.12.13",
+  "q2_scikit_learn_version": "1.7.2",
+  "q3_loaded_model_probability": "0.533",
+  "q4_api_probability": "0.770",
+  "q5_python_base_image": "python:3.11.15-slim-bookworm",
+  "q6_container_probability": "0.770",
+  "python_version": "3.11.15",
+  "uv_version_in_container": "0.10.11",
+  "actual_docker_container_tested": true,
+  "api_and_container_predictions_equal": true,
+  "model_sha256": "1646bbdcd38d4f044da6b630c5b332c93a314245a8c21929011c42de51f629f1",
+  "submission_saved": false,
+  "submission_blocker": "A public code URL is required; publication has not been performed.",
+  "official_instructions": "https://github.com/DataTalksClub/machine-learning-zoomcamp/blob/main/cohorts/2026/homework/05-deployment/homework.md"
+}
