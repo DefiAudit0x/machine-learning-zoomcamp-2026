@@ -71,10 +71,6 @@ uv run python q6_test.py
 
 The scripts write their results to `q3_result.json`, `local_api_result.json`, and `docker_result.json`. `answers.json` contains a summary of the answers and verification. `--network=host` was used when building and running the container in the isolated execution environment; the Dockerfile was not changed.
 
-## Submission Status
-
-At the time of the original local verification, the solution and tests were complete locally. The solution had not been published, and the Homework 5 submission form had not yet been saved; the form requires a public link to the code. The course page was still accepting submissions despite the original deadline having passed.
-
 ## Sources
 
 - [Official Homework 5 instructions](https://github.com/DataTalksClub/machine-learning-zoomcamp/blob/main/cohorts/2026/homework/05-deployment/homework.md)

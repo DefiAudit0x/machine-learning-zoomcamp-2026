@@ -10,7 +10,5 @@
   "actual_docker_container_tested": true,
   "api_and_container_predictions_equal": true,
   "model_sha256": "1646bbdcd38d4f044da6b630c5b332c93a314245a8c21929011c42de51f629f1",
-  "submission_saved": false,
-  "submission_blocker": "A public code URL is required; publication has not been performed.",
   "official_instructions": "https://github.com/DataTalksClub/machine-learning-zoomcamp/blob/main/cohorts/2026/homework/05-deployment/homework.md"
 }
