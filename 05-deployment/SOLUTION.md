@@ -1,41 +1,41 @@
-# واجب 5 — نشر نماذج التعلم الآلي
+# Homework 5 — Deploying Machine Learning Models
 
-حل عملي لواجب **ML Zoomcamp 2026 — Deploying Machine Learning Models** باستخدام ملفات الدفعة الرسمية والنموذج المجمد دون إعادة تدريبه أو تعديل ملف القفل.
+A practical solution to **ML Zoomcamp 2026 — Deploying Machine Learning Models**, using the official cohort files and the frozen model without retraining it or modifying the lockfile.
 
-## الإجابات
+## Answers
 
-| السؤال | الإجابة |
+| Question | Answer |
 |---|---|
-| 1 — نسخة uv المحلية | `0.12.13` |
-| 2 — نسخة Scikit-Learn المقفلة | `1.7.2` |
-| 3 — احتمال التحويل من النموذج | `0.533` |
-| 4 — احتمال التحويل عبر API | `0.770` |
-| 5 — صورة Python الأساسية | `python:3.11.15-slim-bookworm` |
-| 6 — احتمال التحويل من الحاوية | `0.770` |
+| 1 — Local uv version | `0.12.13` |
+| 2 — Locked Scikit-Learn version | `1.7.2` |
+| 3 — Conversion probability from the model | `0.533` |
+| 4 — Conversion probability via the API | `0.770` |
+| 5 — Python base image | `python:3.11.15-slim-bookworm` |
+| 6 — Conversion probability from the container | `0.770` |
 
-القيمة غير المدوّرة للسؤال الثالث هي `0.5329944186432507`. وأعادت واجهة API والحاوية القيمة نفسها تمامًا: `0.769799` مع `conversion: true`.
+The unrounded value for Question 3 is `0.5329944186432507`. The API and container returned exactly the same value: `0.769799` with `conversion: true`.
 
-نسخة `uv` المحلية تختلف عن النسخة المثبتة داخل Docker، وهي `0.10.11`. السؤال الأول يطلب النسخة المحلية؛ وتصف التعليمات الرسمية هذا السؤال بأنه فحص إعداد.
+The local `uv` version differs from the version installed inside Docker, which is `0.10.11`. Question 1 asks for the local version; the official instructions describe this question as a setup check.
 
-## ما تم التحقق منه
+## What Was Verified
 
-- تشغيل البيئة المقفلة باستخدام Python `3.11.15` و`uv sync --locked`.
-- نجاح اختبار `smoke_test.py` المرجعي.
-- تحميل النموذج عبر `pickle` بعد مطابقة بصمة SHA-256 الرسمية.
-- تشغيل واجهة FastAPI محليًا واختبار `/health` و`/predict`.
-- بناء Dockerfile الرسمي وتشغيل حاوية فعلية، ثم نجاح `q6_test.py`.
-- تطابق التنبؤ وبصمتي النموذج وقيم التعويض بين API المحلي والحاوية.
-- عدم تعديل `Dockerfile` أو `uv.lock` أو النموذج الرسمي.
+- Running the locked environment with Python `3.11.15` and `uv sync --locked`.
+- Passing the reference `smoke_test.py` test.
+- Loading the model with `pickle` after matching the official SHA-256 fingerprint.
+- Running the FastAPI locally and testing `/health` and `/predict`.
+- Building the official Dockerfile and running an actual container, then passing `q6_test.py`.
+- Matching predictions, model fingerprints, and imputation values between the local API and the container.
+- No modifications to `Dockerfile`, `uv.lock`, or the official model.
 
-بصمة النموذج:
+Model fingerprint:
 
 ```text
 1646bbdcd38d4f044da6b630c5b332c93a314245a8c21929011c42de51f629f1
 ```
 
-## إعادة التشغيل
+## Re-running
 
-من داخل مجلد المشروع، مع تثبيت `uv` وDocker:
+From inside the project directory, with `uv` and Docker installed:
 
 ```bash
 uv sync --locked
@@ -43,40 +43,40 @@ uv run python smoke_test.py
 uv run python q3.py
 ```
 
-في نافذة طرفية أولى، شغّل API المحلي على منفذ منفصل حتى يمكن مقارنته بالحاوية:
+In a first terminal window, run the local API on a separate port so it can be compared with the container:
 
 ```bash
 uv run uvicorn predict:app --host 127.0.0.1 --port 9697
 ```
 
-وفي نافذة ثانية:
+In a second window:
 
 ```bash
 uv run python verify_api.py --runtime local_api --base-url http://127.0.0.1:9697
 ```
 
-لبناء الحاوية وتشغيلها:
+To build and run the container:
 
 ```bash
 docker build -t zoomcamp-model:2026-hw5 .
 docker run --rm -p 9696:9696 zoomcamp-model:2026-hw5
 ```
 
-ثم من نافذة أخرى:
+Then, from another window:
 
 ```bash
 uv run python verify_api.py --runtime docker --base-url http://127.0.0.1:9696
 uv run python q6_test.py
 ```
 
-تكتب السكربتات نتائجها في `q3_result.json` و`local_api_result.json` و`docker_result.json`. يحتوي `answers.json` على ملخص الإجابات والتحقق. استُخدم `--network=host` عند بناء الحاوية وتشغيلها في بيئة التنفيذ المعزولة؛ لم يتغير Dockerfile.
+The scripts write their results to `q3_result.json`, `local_api_result.json`, and `docker_result.json`. `answers.json` contains a summary of the answers and verification. `--network=host` was used when building and running the container in the isolated execution environment; the Dockerfile was not changed.
 
-## حالة التسليم
+## Submission Status
 
-الحل والاختبارات مكتملان محليًا. لم يُنشر هذا الحل ولم يُحفظ نموذج واجب 5 بعد؛ يشترط النموذج رابطًا عامًا للكود. صفحة الدورة كانت ما تزال تقبل التسليم رغم انتهاء الموعد الأصلي.
+At the time of the original local verification, the solution and tests were complete locally. The solution had not been published, and the Homework 5 submission form had not yet been saved; the form requires a public link to the code. The course page was still accepting submissions despite the original deadline having passed.
 
-## المصادر
+## Sources
 
-- [تعليمات واجب 5 الرسمية](https://github.com/DataTalksClub/machine-learning-zoomcamp/blob/main/cohorts/2026/homework/05-deployment/homework.md)
-- [ملفات الإصدار الرسمي](https://github.com/DataTalksClub/machine-learning-zoomcamp/tree/main/cohorts/2026/homework/05-deployment)
-- [صفحة تسليم الواجب](https://courses.datatalks.club/ml-zoomcamp-2026/homework/hw05)
+- [Official Homework 5 instructions](https://github.com/DataTalksClub/machine-learning-zoomcamp/blob/main/cohorts/2026/homework/05-deployment/homework.md)
+- [Official release files](https://github.com/DataTalksClub/machine-learning-zoomcamp/tree/main/cohorts/2026/homework/05-deployment)
+- [Homework submission page](https://courses.datatalks.club/ml-zoomcamp-2026/homework/hw05)
