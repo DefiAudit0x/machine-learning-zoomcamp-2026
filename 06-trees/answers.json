@@ -1,0 +1,43 @@
+{
+  "q1_split_feature": "model_year",
+  "q2_random_forest_rmse": 1.8370540547300178,
+  "q2_selected_option": "1.837",
+  "q3_best_n_estimators": 100,
+  "q3_validation_rmse_by_n_estimators": {
+    "10": 1.8370540547300178,
+    "50": 1.7715666428333987,
+    "100": 1.7681362324492986,
+    "150": 1.7688040324216567
+  },
+  "q4_best_max_depth": 10,
+  "q4_mean_rmse_by_max_depth": {
+    "10": 1.7554047863550184,
+    "15": 1.7839526938716292,
+    "20": 1.788242068569452,
+    "25": 1.786317363879773
+  },
+  "q5_most_important_feature": "vehicle_weight",
+  "q5_candidate_importances": {
+    "vehicle_weight": 0.20387857204555604,
+    "horsepower": 0.07801732200517682,
+    "acceleration": 0.05520111946946774,
+    "engine_displacement": 0.06100490942209099
+  },
+  "q6_best_eta": 0.1,
+  "q6_validation_rmse_by_eta": {
+    "0.3": 1.8264579799904583,
+    "0.1": 1.724810059827976
+  },
+  "dataset_sha256": "00a5cab178a8b7cd6e9157ee71dabc236ba7f20b1832336d358b07af14ba431f",
+  "rows": 10000,
+  "split_sizes": {
+    "train": 6000,
+    "validation": 2000,
+    "test": 2000
+  },
+  "versions": {
+    "pandas": "2.3.2",
+    "scikit_learn": "1.7.2",
+    "xgboost": "3.2.0"
+  }
+}
